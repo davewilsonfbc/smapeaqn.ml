@@ -23,6 +23,7 @@ In order to replicate the experiment, please proceed as follows.
   **1.** Follow the [Instructions for Running the cutom NSGA-II genetic algorithm](#nsga-run), thus obtaining a Run configuration.
 
   **2.** Run the obtained configuration multiple times, as follows:
+  
       - One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
       -  One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
 
