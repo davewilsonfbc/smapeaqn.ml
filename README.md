@@ -42,7 +42,7 @@ Training and test sets *.arff* files must be created, based on the *.tsv* files 
 #### a) Auto-Weka timeout analysis
 In order to identify possibly convenient values for Auto-Weka timeouts, an analysis has been conducted, which can be replicated as follows.
 
-[**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *timeout analysis*.]
+[**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *Timeout_analysis*.]
 
    **1.** An Auto-Weka experiment has been created with respect to different combinations of timeout values, by following the [Instructions for building Auto-Weka experiments](#auto-weka-build) and by providing training and test sets for *CriticalPlan* job class (i.e. the most demanding one) towards *CloudController* (i.e. the remote controller).
    In particular, the following combinations of Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout, have been considered:
@@ -51,7 +51,7 @@ In order to identify possibly convenient values for Auto-Weka timeouts, an analy
    **2.** Each of the 7 Auto-Weka experiments created in the previous step for *CriticalPlan* towards *CloudController* has been run, by following [Instructions for running Auto-Weka experiments](#auto-weka-run).
 
 #### b) Auto-Weka execution for Controller Selection Policy problem
-Once timeout values have been chosen, Auto-Weka has been exploited in order to obtain *S$\rightarrow$M* routing probabilities for MAPE job classes, as follows.
+Once timeout values have been chosen, Auto-Weka has been exploited in order to obtain *S->M* routing probabilities for MAPE job classes, as follows.
 
 [**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *2-30-5_funct_rules_trees*.]
 
@@ -111,23 +111,23 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
 
    **3. Experiment settings**:
 
-       - Name the experiment.
-       - Select the output folder (e.g. a folder named *experiment*);
-       - Select *Root Mean Squared Error (Regression)* as result metric.
-       - Select *SMAC* as optimisation method, then *Edit*:
-          -  Select the file named *smac* inside SMAC v2.10.03 folder as SMAC Executable.
+   - Name the experiment.
+   - Select the output folder (e.g. a folder named *experiment*);
+   - Select *Root Mean Squared Error (Regression)* as result metric.
+   - Select *SMAC* as optimisation method, then *Edit*:
+      -  Select the file named *smac* inside SMAC v2.10.03 folder as SMAC Executable.
 
-          [**Note**: Such file is inside *autoweka-0.5* folder if you downloaded the provided bundle.]
+      [**Note**: Such file is inside *autoweka-0.5* folder if you downloaded the provided bundle.]
 
-          - Initial Incumbent: Random.
-          - Execution Mode: SMAC.
-          - InitialN: 1.
-       - Set Training Memory Limit to a value which is suitable for the machine onto which Auto-Weka is run.
-       [**Note**: The default value of 1000 MB has been used in the experimentation.]
-       - Check Use Attribute Selection option.
-       - Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
+      - Initial Incumbent: Random.
+      - Execution Mode: SMAC.
+      - InitialN: 1.
+   - Set Training Memory Limit to a value which is suitable for the machine onto which Auto-Weka is run.
+   [**Note**: The default value of 1000 MB has been used in the experimentation.]
+   - Check Use Attribute Selection option.
+   - Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
 
-    [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
+   [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
 
 ### <a name="auto-weka-run">Running experiments</a>
 Auto-Weka experiments can be executed by means of **Experiment Runner** wizard [Click *Run* at the end]:
