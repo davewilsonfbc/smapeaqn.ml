@@ -126,9 +126,7 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
 
 ### <a name="auto-weka-run">Running experiments</a>
 Auto-Weka experiments can be executed by means of **Experiment Runner** wizard [Click *Run* at the end]:
-   - **Experiment folder**: Click *Open*, browse to the parent directory of an experiment folder and then select the latter.
-
-   [**Note**: You do not have to enter inside the experiment folder, but you just have to select it!]
+   - **Experiment folder**: Click *Open*, browse to the parent directory of an experiment folder and then select the latter. [**Note**: You do not have to enter inside the experiment folder, but you just have to select it!]
 
    - **Seed**: Provide a seed. [**Note**: The default value of 0 has been used in the experimentation.]
 
