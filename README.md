@@ -5,7 +5,7 @@
 
 **This project is related to the paper that I have submitted to the [SoSyM Theme Section *AI-enhanced Model-Driven Engineering*](https://www.sosym.org/theme_sections/cfp/cfp-SoSyM-TI-AI-MDE21.pdf)**. In particular, it supports the experimentation conducted in the paper, by providing everything that is needed, i.e. results, artifacts and replication instructions:
   - *SMAPEA-QN-emergency-handling.jsimg* contains the SMAPEA Queuing Network (QN) for the considered case study, as an xmi representation conforming to JSimGraph from [JMT](http://jmt.sourceforge.net/).
-    [Note: A backup file is also provided, corresponding to the *-bkp* suffix.]
+  [**Note**: A backup file is also provided, corresponding to the *-bkp* suffix.]
   - *res_sim_SMAPEA-QN-emergency-handling.jsim* is a temporary file used to store simulation results.
   - *Custom_NSGA-II_executions.zip* folder contains the results of step **(1) Meta-heuristic**, in particular:
      - *09_00625_ps_ne_det05_1min* subfolder refers to test sets building.
@@ -27,7 +27,7 @@ In order to replicate the experiment, please proceed as follows.
   - One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
   - One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
 
-  [**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]
+  <div style="text-align: right">[**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]</div>
 
 ### (2) Training and Test Sets Builder (currently manual)
 Training and test sets *.arff* files must be created, based on the *.tsv* files returned by step (1). In particular, training sets shall be derived from point *6.a)* of step (1), whilst test sets shall be carried out from point *6.b)*. Please refer to *.arff* files provided in the *Datasets building* subfolder for the syntax of such files.
