@@ -36,7 +36,7 @@ Training and test sets *.arff* files must be created, based on the *.tsv* files 
 
 ### (3) Machine-Learning Classifiers
    **Pre-requisites**: [Auto-Weka v0.5](http://www.cs.ubc.ca/labs/beta/Projects/autoweka/) equipped with [SMAC v2.10.03](https://www.cs.ubc.ca/labs/beta/Projects/SMAC/v2.10.03/quickstart.html).
-   [**Note**: A [*.zip* file](https://github.com/davewilsonfbc/smapeaqn.ml/blob/master/autoweka-0.5.zip) is available at this repository, providing a predefined Auto-Weka bundle]
+   [**Note**: A [*.zip* file](https://github.com/davewilsonfbc/smapeaqn.ml/blob/main/autoweka-0.5-with-SMAC-2.10.03.zip) is available at this repository, providing a predefined Auto-Weka bundle]
 
 #### a) Auto-Weka timeout analysis
 In order to identify possibly convenient values for Auto-Weka timeouts, an analysis has been conducted, which can be replicated as follows.
