@@ -21,21 +21,28 @@ In order to replicate the experiment, please proceed as follows.
 
 ### (1) Meta-heuristic
   **1.** Follow the [Instructions for Running the cutom NSGA-II genetic algorithm](#nsga-run), thus obtaining a Run configuration.
+
   **2.** Run the obtained configuration multiple times, as follows:
+
       *a)* One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
+
       *b)*  One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
-     [**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]
+
+  [**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]
 
 ### (2) Training and Test Sets Builder (currently manual)
 Training and test sets *.arff* files must be created, based on the *.tsv* files returned by step (1). In particular, training sets shall be derived from point *6.a)* of step (1), whilst test sets shall be carried out from point *6.b)*. Please refer to *.arff* files provided in the *Datasets building* subfolder for the syntax of such files.
-  [**Note:** For each NSGA-II execution, *VARIABLES.tsv* contains near-Pareto CSP solutions in terms of routing probabilities for Normal and Critical MAPE job classes; *FITNESS.tsv*, instead, contains the corresponding mean system response times estimated for each solution, modulo Normal and Critical modes.]
+
+[**Note:** For each NSGA-II execution, *VARIABLES.tsv* contains near-Pareto CSP solutions in terms of routing probabilities for Normal and Critical MAPE job classes; *FITNESS.tsv*, instead, contains the corresponding mean system response times estimated for each solution, modulo Normal and Critical modes.]
 
 ### (3) Machine-Learning Classifiers
    **Pre-requisites**: [Auto-Weka v0.5](http://www.cs.ubc.ca/labs/beta/Projects/autoweka/) equipped with [SMAC v2.10.03](https://www.cs.ubc.ca/labs/beta/Projects/SMAC/v2.10.03/quickstart.html).
+
    [**Note**: A [*.zip* file](https://github.com/davewilsonfbc/smapeaqn.ml/blob/master/autoweka-0.5.zip) is available at this repository, providing a predefined Auto-Weka bundle]
 
 #### a) Auto-Weka timeout analysis
 In order to identify possibly convenient values for Auto-Weka timeouts, an analysis has been conducted, which can be replicated as follows.
+
 [**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *timeout analysis*.]
 
    **1.** An Auto-Weka experiment has been created with respect to different combinations of timeout values, by following the [Instructions for building Auto-Weka experiments](#auto-weka-build) and by providing training and test sets for *CriticalPlan* job class (i.e. the most demanding one) towards *CloudController* (i.e. the remote controller).
@@ -46,6 +53,7 @@ In order to identify possibly convenient values for Auto-Weka timeouts, an analy
 
 #### b) Auto-Weka execution for Controller Selection Policy problem
 Once timeout values have been chosen, Auto-Weka has been exploited in order to obtain *S$\rightarrow$M* routing probabilities for MAPE job classes, as follows.
+
 [**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *2-30-5_funct_rules_trees*.]
 
    **1.** An Auto-Weka experiment has been created for each combination of (MAPE job class, controller), by following the [Instructions for building Auto-Weka experiments](#auto-weka-build) and properly providing training and test sets, with respect to the timeout values that have been previously chosen.
@@ -55,14 +63,7 @@ Once timeout values have been chosen, Auto-Weka has been exploited in order to o
 
 #### c) Auto-Weka results post-processing
    **1.** Among several files created by Auto-Weka after an experiment run, a *predictions.0.csv* file is created in the experiment folder, containing predictions of the selected classifier with respect to the provided test set.
-For each Auto-Weka experiment that has been run during the experimentation, average predicted values modulo the considered workloads have been calculated (directly into the corresponding *predictions.0.csv* file) and then normalized based on the following equation:
-$$
-p({jc}_i,o_j)'=\frac{p({jc}_i,o_j)}{\sum_{j=1}^{c}p({jc}_i,o_j)}, 1 \leq i \leq 4 \times m.
-$$
-where:
-   - $p({jc}_i,o_j)$ is the predicted routing probability for job class ${jc}_i$ towards the controller placed on the *S$\rightarrow$M* outgoing path $o_j$.
-   - $m$ is the number of system modes, i.e. 2.
-   - $c$ is the number of outgoing paths, i.e. 3.
+For each Auto-Weka experiment that has been run during the experimentation, average predicted values modulo the considered workloads have been calculated (directly into the corresponding *predictions.0.csv* file) and then normalized over the three controllers.
 
 **2.** The obtained CSP solutions - one per each considered workload - have been simulated within JSimGraph tool from [JMT](http://jmt.sourceforge.net/) for sake of comparison.
 
@@ -75,14 +76,22 @@ where:
 In the following, general instructions are provided for easing step **(1) Meta-heuristic**.
 
   **1.** Checkout (or download as *.zip* and extract) the GitHub project at https://github.com/davewilsonfbc/smapeaqn.moo, import the project into the Eclipse workspace and the related Maven dependencies.
+
   **2.** Create a folder named *experiment* in the main project folder
+
   **3.** Copy the file*SMAPEA-QN-emergency-handling.jsimg* into *experiment* folder
+
   **4.** Crete a new Run configuration with:
+
     *a)* Main Class: *it.univaq.disim.seagroup.smapeaqn.moo.runners.CspNSGAIIRunner*
-    **b)** Program arguments: *./experiments/SMAPEA-QN-emergency-handling.jsimg 2 3 0.9 0.0625 pop numevals*, i.e.:
+
+    *b)* Program arguments: *./experiments/SMAPEA-QN-emergency-handling.jsimg 2 3 0.9 0.0625 pop numevals*, i.e.:
        2 system modes, 3 controllers, 0.9 (90%) and 0.0625 (6.25%) as crossover and mutation probabilities, pop and numevals (denoting population size and number of evaluations, respectively).
+
   **5.** Set the desired workload intensity by choosing one of the options below:
+
     *a)* Open *SMAPEA-QN-emergency-handling.jsimg* file with JSimGraph, go to "Define customer classes" and then edit the Interarrival Time Distribution for *Sense* class by providing a mean value, e.g. 0.5.
+
     *b)* Open *SMAPEA-QN-emergency-handling.jsimg* file through a text/XML editor and provide a workload intensity inside the `<value>` tag of subparameter "t" within "distrParam" (please find those tags at lines 30-32 circa), e.g. `<value>`0.5`</value>` .
 
 
@@ -94,9 +103,13 @@ In the following, general instructions are provided for easing step **(3) Machin
 
 ### <a name="auto-weka-build">Building experiments</a>
 Auto-Weka experiments can be created by means of **Experiment Builder** wizard, which consists of 3 steps [Click *Save* at the end]:
+
    **1. Dataset selection**: Provide the training and test set in the form of *.arff* files and select *Cross-Validation* as Instance generator; Click *Next*.
+
    **2. Classifier selection**: Select all classifiers belonging to *functions*, *rules* and *trees* families; Click *Next*.
+
    [Note: Other classifiers have been excluded from the experimentation due to fatal errors raised by Auto-Weka when they were selected.]
+
    **3. Experiment settings**:
        - Name the experiment.
        - Select the output folder (e.g. a folder named *experiment*);
@@ -111,6 +124,7 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
        [**Note**: The default value of 1000 MB has been used in the experimentation.]
        - Check Use Attribute Selection option.
        - Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
+
        [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
 
 ### <a name="auto-weka-run">Running experiments</a>
