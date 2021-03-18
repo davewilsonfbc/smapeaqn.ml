@@ -111,18 +111,19 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
 
    **3. Experiment settings**:
 
-   3.1) Name the experiment.
-   3.2) Select the output folder (e.g. a folder named *experiment*);
-   3.3) Select *Root Mean Squared Error (Regression)* as result metric.
-   3.4) Select *SMAC* as optimisation method, then *Edit*:
-      -  Select the file named *smac* inside SMAC v2.10.03 folder as SMAC Executable. [**Note**: Such file is inside *autoweka-0.5* folder if you downloaded the provided bundle.]
+   - Name the experiment.
+   - Select the output folder (e.g. a folder named *experiment*);
+   - Select *Root Mean Squared Error (Regression)* as result metric.
+   - Select *SMAC* as optimisation method, then *Edit*:
+      -  Select the file named *smac* inside SMAC v2.10.03 folder as SMAC Executable.
+      [**Note**: Such file is inside *autoweka-0.5* folder if you downloaded the provided bundle.]
       - Initial Incumbent: Random.
       - Execution Mode: SMAC.
       - InitialN: 1.
-   3.5) Set Training Memory Limit to a value which is suitable for the machine onto which Auto-Weka is run.
+   - Set Training Memory Limit to a value which is suitable for the machine onto which Auto-Weka is run.
    [**Note**: The default value of 1000 MB has been used in the experimentation.]
-   3.6) Check Use Attribute Selection option.
-   3.7) Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
+   - Check Use Attribute Selection option.
+   - Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
 
    [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
 
