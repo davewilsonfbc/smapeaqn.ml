@@ -27,7 +27,7 @@ In order to replicate the experiment, please proceed as follows.
   - One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
   - One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
 
-  <div style="text-align: right">[**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]</div>
+  [**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]
 
 ### (2) Training and Test Sets Builder (currently manual)
 Training and test sets *.arff* files must be created, based on the *.tsv* files returned by step (1). In particular, training sets shall be derived from point *6.a)* of step (1), whilst test sets shall be carried out from point *6.b)*. Please refer to *.arff* files provided in the *Datasets building* subfolder for the syntax of such files.
@@ -36,12 +36,10 @@ Training and test sets *.arff* files must be created, based on the *.tsv* files 
 
 ### (3) Machine-Learning Classifiers
    **Pre-requisites**: [Auto-Weka v0.5](http://www.cs.ubc.ca/labs/beta/Projects/autoweka/) equipped with [SMAC v2.10.03](https://www.cs.ubc.ca/labs/beta/Projects/SMAC/v2.10.03/quickstart.html).
-
    [**Note**: A [*.zip* file](https://github.com/davewilsonfbc/smapeaqn.ml/blob/master/autoweka-0.5.zip) is available at this repository, providing a predefined Auto-Weka bundle]
 
 #### a) Auto-Weka timeout analysis
 In order to identify possibly convenient values for Auto-Weka timeouts, an analysis has been conducted, which can be replicated as follows.
-
 [**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *Timeout_analysis*.]
 
    **1.** An Auto-Weka experiment has been created with respect to different combinations of timeout values, by following the [Instructions for building Auto-Weka experiments](#auto-weka-build) and by providing training and test sets for *CriticalPlan* job class (i.e. the most demanding one) towards *CloudController* (i.e. the remote controller).
@@ -52,7 +50,6 @@ In order to identify possibly convenient values for Auto-Weka timeouts, an analy
 
 #### b) Auto-Weka execution for Controller Selection Policy problem
 Once timeout values have been chosen, Auto-Weka has been exploited in order to obtain *S->M* routing probabilities for MAPE job classes, as follows.
-
 [**Note**: Auto-Weka experiments that have been built for this step are contained in the subfolder *2-30-5_funct_rules_trees*.]
 
    **1.** An Auto-Weka experiment has been created for each combination of (MAPE job class, controller), by following the [Instructions for building Auto-Weka experiments](#auto-weka-build) and properly providing training and test sets, with respect to the timeout values that have been previously chosen.
@@ -62,9 +59,9 @@ Once timeout values have been chosen, Auto-Weka has been exploited in order to o
 
 #### c) Auto-Weka results post-processing
    **1.** Among several files created by Auto-Weka after an experiment run, a *predictions.0.csv* file is created in the experiment folder, containing predictions of the selected classifier with respect to the provided test set.
-For each Auto-Weka experiment that has been run during the experimentation, average predicted values modulo the considered workloads have been calculated (directly into the corresponding *predictions.0.csv* file) and then normalized over the three controllers.
+   For each Auto-Weka experiment that has been run during the experimentation, average predicted values modulo the considered workloads have been calculated (directly into the corresponding *predictions.0.csv* file) and then normalized over the three controllers.
 
-**2.** The obtained CSP solutions - one per each considered workload - have been simulated within JSimGraph tool from [JMT](http://jmt.sourceforge.net/) for sake of comparison.
+   **2.** The obtained CSP solutions - one per each considered workload - have been simulated within JSimGraph tool from [JMT](http://jmt.sourceforge.net/) for sake of comparison.
 
 
 
@@ -135,4 +132,4 @@ Auto-Weka experiments can be executed by means of **Experiment Runner** wizard [
 
    - **Seed**: Provide a seed. [**Note**: The default value of 0 has been used in the experimentation.]
 
-[**IMPORTANT NOTE**: It might happen that Auto-Weka runs to infinite. For this reason, if an execution is taking much longer than the Optimisation timeout, it is recommended to stop a run it again.]
+[**GENERAL IMPORTANT NOTE**: It might happen that Auto-Weka runs to infinite. For this reason, if an execution is taking much longer than the Optimisation timeout, it is recommended to stop a run it again.]
