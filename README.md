@@ -24,9 +24,8 @@ In order to replicate the experiment, please proceed as follows.
 
   **2.** Run the obtained configuration multiple times, as follows:
 
-    *a)* One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
-
-    *b)* One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
+  - One execution with population size 10 and number of evaluations 100, for each considered workload - i.e. det(x), 0.5 <= x <= 2.5 with step 0.25);
+  - One execution with population size {10, 30, 60, 90, 120, 180, 360} and number of evaluations {60, 180, 360, 720, 1080, 1440, 1800}, for the heaviest workload - i.e. det(0.5).
 
   [**Note**: To save space, after performance evaluation of a solution, the corresponding *.jsimg* file is deleted from the file system. To maintain the generated SMAPEA QN models, remove the call to *deleteModelFiles* method within *CspSimpleNSGAIIRunner* class.]
 
@@ -83,16 +82,16 @@ In the following, general instructions are provided for easing step **(1) Meta-h
 
   **4.** Crete a new Run configuration with:
 
-    *a)* Main Class: *it.univaq.disim.seagroup.smapeaqn.moo.runners.CspNSGAIIRunner*
+  - Main Class: *it.univaq.disim.seagroup.smapeaqn.moo.runners.CspNSGAIIRunner*
 
-    *b)* Program arguments: *./experiments/SMAPEA-QN-emergency-handling.jsimg 2 3 0.9 0.0625 pop numevals*, i.e.:
+  - Program arguments: *./experiments/SMAPEA-QN-emergency-handling.jsimg 2 3 0.9 0.0625 pop numevals*, i.e.:
        2 system modes, 3 controllers, 0.9 (90%) and 0.0625 (6.25%) as crossover and mutation probabilities, pop and numevals (denoting population size and number of evaluations, respectively).
 
   **5.** Set the desired workload intensity by choosing one of the options below:
 
-    *a)* Open *SMAPEA-QN-emergency-handling.jsimg* file with JSimGraph, go to "Define customer classes" and then edit the Interarrival Time Distribution for *Sense* class by providing a mean value, e.g. 0.5.
+  - Open *SMAPEA-QN-emergency-handling.jsimg* file with JSimGraph, go to "Define customer classes" and then edit the Interarrival Time Distribution for *Sense* class by providing a mean value, e.g. 0.5.
 
-    *b)* Open *SMAPEA-QN-emergency-handling.jsimg* file through a text/XML editor and provide a workload intensity inside the `<value>` tag of subparameter "t" within "distrParam" (please find those tags at lines 30-32 circa), e.g. `<value>`0.5`</value>` .
+  - Open *SMAPEA-QN-emergency-handling.jsimg* file through a text/XML editor and provide a workload intensity inside the `<value>` tag of subparameter "t" within "distrParam" (please find those tags at lines 30-32 circa), e.g. `<value>`0.5`</value>` .
 
 
 ## Instructions for building and running Auto-Weka experiments
@@ -108,15 +107,18 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
 
    **2. Classifier selection**: Select all classifiers belonging to *functions*, *rules* and *trees* families; Click *Next*.
 
-   [Note: Other classifiers have been excluded from the experimentation due to fatal errors raised by Auto-Weka when they were selected.]
+   [**Note**: Other classifiers have been excluded from the experimentation due to fatal errors raised by Auto-Weka when they were selected.]
 
    **3. Experiment settings**:
+
        - Name the experiment.
        - Select the output folder (e.g. a folder named *experiment*);
        - Select *Root Mean Squared Error (Regression)* as result metric.
        - Select *SMAC* as optimisation method, then *Edit*:
           -  Select the file named *smac* inside SMAC v2.10.03 folder as SMAC Executable.
+
           [**Note**: Such file is inside *autoweka-0.5* folder if you downloaded the provided bundle.]
+
           - Initial Incumbent: Random.
           - Execution Mode: SMAC.
           - InitialN: 1.
@@ -125,13 +127,14 @@ Auto-Weka experiments can be created by means of **Experiment Builder** wizard, 
        - Check Use Attribute Selection option.
        - Set Optimisation Timeout, Training Run Timeout and Attribute Selection Timeout to the values chosen during step **(3.a)**.
 
-       [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
+    [**Note**: In the experimentation, they have been set to 2 hours, 30 minutes and 5 minutes, respectively.]
 
 ### <a name="auto-weka-run">Running experiments</a>
 Auto-Weka experiments can be executed by means of **Experiment Runner** wizard [Click *Run* at the end]:
    - **Experiment folder**: Click *Open*, browse to the parent directory of an experiment folder and then select the latter.
-[**Note**: You do not have to enter inside the experiment folder, but you just have to select it!]
-   - **Seed**: Provide a seed.
- [**Note**: The default value of 0 has been used in the experimentation.]
+
+   [**Note**: You do not have to enter inside the experiment folder, but you just have to select it!]
+
+   - **Seed**: Provide a seed. [**Note**: The default value of 0 has been used in the experimentation.]
 
 [**IMPORTANT NOTE**: It might happen that Auto-Weka runs to infinite. For this reason, if an execution is taking much longer than the Optimisation timeout, it is recommended to stop a run it again.]
